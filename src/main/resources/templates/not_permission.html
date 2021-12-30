@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Access Fail</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+    <div class="" style="text-align: center">
+        <h1>403</h1>
+        <p>You do not have permission to access this page</p>
+        <a th:href="@{/students}" style="text-decoration: none">
+            <button type="submit" class="btn btn-warning">
+                Back main page
+            </button>
+        </a>
+    </div>
+
+</body>
+</html>

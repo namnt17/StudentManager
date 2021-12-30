@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Management Project</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <div class="row" style="text-align: center">
+            <h1>[[#{app.title}]]</h1>
+        </div>
+        <div sec:authorize="isAuthenticated()">
+            Welcome <b><span sec:authentication="name">Username</span></b>
+            &nbsp;
+            <i><span sec:authentication="principal.authorities">Roles</span></i>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-3">
+                <a th:href="@{/students/new}" class="btn btn-primary btn-sm mb-3">[[#{app.add}]]</a>
+            </div>
+
+            <div class="col-lg-3">
+                <form th:action="@{/logout}" method="post">
+                    <button value="Logout" type="submit" class="btn btn-warning">[[#{app.logout}]]</button>
+                </form>
+            </div>
+            <div class="col-lg-6 d-flex justify-content-end">
+                <a th:href="@{?lang=en}">
+                    <img th:src="@{/img/uk_flag.png}" alt="uk_flag" width="70px" height="46px"/>
+                </a>
+                <a th:href="@{?lang=vi}" style="margin-left: 10px">
+                    <img  alt="vi_flag" th:src="@{/img/vietnam_flag.png}" width="70px"/>
+                </a>
+            </div>
+        </div>
+
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>[[#{app.firstName}]]</th>
+                    <th>[[#{app.lastName}]]</th>
+                    <th>Email</th>
+                    <th sec:authorize="hasAuthority('ADMIN')">[[#{app.actions}]]</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr th:each="student: ${students}">
+                    <td th:text="*{student.id}"></td>
+                    <td th:text="*{student.firstName}"></td>
+                    <td th:text="*{student.lastName}"></td>
+                    <td th:text="*{student.email}"></td>
+                    <td sec:authorize="hasAuthority('ADMIN')">
+                        <a th:href="@{/students/edit/{id}(id=${student.id})}" class="btn btn-primary">[[#{app.update}]]</a>
+                        <a th:href="@{/students/{id}(id=${student.id})}" class="btn btn-danger">[[#{app.delete}]]</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
