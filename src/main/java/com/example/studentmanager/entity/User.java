@@ -23,6 +23,9 @@ public class User {
     @Column(name = "verification_code", updatable = false)
     private String verification_code;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "auth_provider")
+    private AuthenticationProvider authenticationProvider;
 
     // sử dụng fetch eager sẽ lấy dữ liệu của dữ liệu có liên quan
     // sử dụng cascade để tự động update khi có thay đổi gì đối với các field có liên quan
@@ -92,5 +95,13 @@ public class User {
 
     public void setVerification_code(String verification_code) {
         this.verification_code = verification_code;
+    }
+
+    public AuthenticationProvider getAuthenticationProvider() {
+        return authenticationProvider;
+    }
+
+    public void setAuthenticationProvider(AuthenticationProvider authenticationProvider) {
+        this.authenticationProvider = authenticationProvider;
     }
 }

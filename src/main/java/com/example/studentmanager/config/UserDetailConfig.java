@@ -22,7 +22,7 @@ public class UserDetailConfig implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Set<Role> roles = user.getRoles();
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
-        for(Role role: roles){
+        for (Role role : roles) {
             authorities.add(new SimpleGrantedAuthority(role.getName()));
         }
         return authorities;
@@ -31,7 +31,7 @@ public class UserDetailConfig implements UserDetails {
     // hàm getPassword lấy ra mật khẩu của user
     @Override
     public String getPassword() {
-        if(user.getPassword() == null){
+        if (user.getPassword() == null) {
             return null;
         }
         return user.getPassword();
@@ -40,7 +40,7 @@ public class UserDetailConfig implements UserDetails {
     // hàm lấy ra tên của user
     @Override
     public String getUsername() {
-        if(user.getUsername() == null){
+        if (user.getUsername() == null) {
             return null;
         }
         return user.getUsername();

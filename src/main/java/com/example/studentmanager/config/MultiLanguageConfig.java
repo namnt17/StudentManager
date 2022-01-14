@@ -15,7 +15,7 @@ public class MultiLanguageConfig implements WebMvcConfigurer {
 
     // set default language when application start is us
     @Bean
-    public LocaleResolver localeResolver(){
+    public LocaleResolver localeResolver() {
         SessionLocaleResolver localeResolver = new SessionLocaleResolver();
         localeResolver.setDefaultLocale(Locale.US);
         return localeResolver;
@@ -24,7 +24,7 @@ public class MultiLanguageConfig implements WebMvcConfigurer {
     // chặn tất cả các request của user để thêm logic
     // ở đây sẽ xử thêm vào param lang để chuyển đổi ngôn ngữ
     @Bean
-    public LocaleChangeInterceptor localeChangeInterceptor(){
+    public LocaleChangeInterceptor localeChangeInterceptor() {
         LocaleChangeInterceptor localeInterceptor = new LocaleChangeInterceptor();
         localeInterceptor.setParamName("lang");
         return localeInterceptor;

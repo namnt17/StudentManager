@@ -22,7 +22,7 @@ public class UserDetailService implements UserDetailsService {
         User user = null;
         try {
             user = userRepository.getUserByUsername(username);
-        }catch (NullPointerException e){
+        } catch (NullPointerException e) {
             System.out.println("Couldn't found the account");
         }
         return new UserDetailConfig(user);

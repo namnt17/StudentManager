@@ -24,30 +24,30 @@ public class StudentAPIController {
 
     // Get All Students
     @GetMapping()
-    public List<Student> listAll(){
+    public List<Student> listAll() {
         return studentService.getStudents();
     }
 
     // Get Student By ID
     @GetMapping("/{id}")
-    public ResponseEntity<Student> getStudentById(@PathVariable Long id){
+    public ResponseEntity<Student> getStudentById(@PathVariable Long id) {
         try {
             Student student = studentService.getStudentById(id);
             return new ResponseEntity<>(student, HttpStatus.OK);
-        }catch (Exception e){
+        } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
     //Add new Student
     @PostMapping
-    public void addNewStudent(@RequestBody Student student){
+    public void addNewStudent(@RequestBody Student student) {
         studentService.saveStudent(student);
     }
 
     //Update Student By ID
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateStudentById(@RequestBody Student student, @PathVariable Long id){
+    public ResponseEntity<?> updateStudentById(@RequestBody Student student, @PathVariable Long id) {
         try {
             Student existStudent = studentService.getStudentById(id);
             existStudent.setFirstName(student.getFirstName());
@@ -55,17 +55,18 @@ public class StudentAPIController {
             existStudent.setEmail(student.getEmail());
             studentService.saveStudent(existStudent);
             return new ResponseEntity<>(HttpStatus.OK);
-        }catch (NoSuchElementException e){
+        } catch (NoSuchElementException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
     // Delete Student By ID
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteStudentById(@PathVariable Long id){
+    public ResponseEntity<?> deleteStudentById(@PathVariable Long id) {
         try {
             studentService.deleteStudent(id);
             return new ResponseEntity<>(HttpStatus.OK);
-        }catch (NoSuchElementException e){
+        } catch (NoSuchElementException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }

@@ -21,17 +21,17 @@ public class UserAPIController {
 
     // get all user
     @GetMapping
-    public List<UserDTO> getAllUser(){
+    public List<UserDTO> getAllUser() {
         return userService.getAllUser();
     }
 
     // get user by id
     @GetMapping("/{id}")
-    public ResponseEntity<UserDTO> getUserById(@PathVariable Long id){
+    public ResponseEntity<UserDTO> getUserById(@PathVariable Long id) {
         try {
             UserDTO user = userService.getUserById(id);
-            return new ResponseEntity<>(user,HttpStatus.OK);
-        }catch (Exception e){
+            return new ResponseEntity<>(user, HttpStatus.OK);
+        } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }

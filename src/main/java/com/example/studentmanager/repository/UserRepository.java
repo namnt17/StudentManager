@@ -11,12 +11,12 @@ import org.springframework.stereotype.Repository;
 
 
 @Repository
-public interface UserRepository extends JpaRepository<User,Long> {
+public interface UserRepository extends JpaRepository<User, Long> {
     @Query(value = "SELECT u FROM User u WHERE u.username = :username")
     User getUserByUsername(@Param("username") String username);
 
     @Modifying
-    @Query(value = "update users set enabled = true where user_id = :id",nativeQuery = true)
+    @Query(value = "update users set enabled = true where user_id = :id", nativeQuery = true)
     void verifySuccessAccount(@Param("id") Long id);
 
     @Query("SELECT u FROM User u WHERE u.verification_code = :code")

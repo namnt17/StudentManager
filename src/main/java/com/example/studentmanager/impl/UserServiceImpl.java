@@ -12,6 +12,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.io.UnsupportedEncodingException;
@@ -39,9 +40,8 @@ public class UserServiceImpl implements UserService {
         this.userRepository = userRepository;
     }
 
-
     @Override
-    public void saveUser(User user,String siteURL)
+    public void saveUser(User user, String siteURL)
             throws MessagingException, UnsupportedEncodingException {
         String encoded = this.passwordEncoder.encode(user.getPassword());
         String verify_code = RandomString.make(64);
@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService {
         user.setEnabled(false);
         user.setVerification_code(verify_code);
         userRepository.save(user);
-        sendVerificationEmail(user,siteURL);
+        sendVerificationEmail(user, siteURL);
     }
 
     @Override
@@ -64,7 +64,7 @@ public class UserServiceImpl implements UserService {
                 + "Thank you,<br>"
                 + "Author.";
         MimeMessage message = mailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(message,true);
+        MimeMessageHelper helper = new MimeMessageHelper(message, true);
         helper.setFrom(fromAddress, senderName);
         helper.setTo(toAddress);
         helper.setSubject(subject);
@@ -89,9 +89,20 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    @Override
+    public User getUserByEmail(String email) {
+        User user = null;
+        try {
+            user = userRepository.getUserByUsername(email);
+        } catch (NullPointerException e) {
+            System.out.println("Couldn't found this user in database");
+        }
+        return user;
+    }
+
 
     // get all user without field password
-    public List<UserDTO> getAllUser(){
+    public List<UserDTO> getAllUser() {
         return userRepository.findAll()
                 // trả về luồng xử lý theo tuần tự
                 .stream()
@@ -103,7 +114,7 @@ public class UserServiceImpl implements UserService {
 
     // method giúp convert đối tượng User sang đối tượng DTO
     // giúp loại bỏ field password khi trả về cho client
-    private UserDTO convertEntityToDTO(User user){
+    private UserDTO convertEntityToDTO(User user) {
         UserDTO userDTO = new UserDTO();
         userDTO.setId(user.getId());
         userDTO.setUsername(user.getUsername());
@@ -111,14 +122,13 @@ public class UserServiceImpl implements UserService {
         return userDTO;
     }
 
-    public UserDTO getUserById(Long id){
+    public UserDTO getUserById(Long id) {
         // get User from Database
         User user = userRepository.findById(id).get();
         // map thành UserDTO
-        UserDTO userDTO = mapper.map(user,UserDTO.class);
+        UserDTO userDTO = mapper.map(user, UserDTO.class);
         return userDTO;
     }
-
 
 
 }
