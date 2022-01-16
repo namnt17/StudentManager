@@ -1,7 +1,6 @@
 package com.example.studentmanager.oauth;
 
 import com.example.studentmanager.entity.User;
-import com.example.studentmanager.security.CustomOAuth2User;
 import com.example.studentmanager.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -14,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 
+//hihi thay doi nay
 @Component
 public class OAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
