@@ -20,20 +20,20 @@ public class StudentManagerApplication  {
     }
 
 
-    @Scheduled(fixedRate = 1000L)
-    void someJob() throws InterruptedException{
-        System.out.println("thực hiện trong thời gian nhất định " + new Date());
-    }
-
-    @Scheduled(cron = "15 * * * * ?")
-    public void scheduleTaskWithCronExpression() {
-        System.out.println("Sử dụng cron với thời gian vào giây thứ 15 của mỗi phút");
-    }
-
-    @Scheduled(fixedRate = 2000, initialDelay = 20000)
-    public void scheduleTaskWithInitialDelay() {
-        System.out.println("thực hiện thông qua khoảng thời gian " + new Date());
-    }
+//    @Scheduled(fixedRate = 1000L)
+//    void someJob() throws InterruptedException{
+//        System.out.println("thực hiện trong thời gian nhất định " + new Date());
+//    }
+//
+//    @Scheduled(cron = "15 * * * * ?")
+//    public void scheduleTaskWithCronExpression() {
+//        System.out.println("Sử dụng cron với thời gian vào giây thứ 15 của mỗi phút");
+//    }
+//
+//    @Scheduled(fixedRate = 2000, initialDelay = 20000)
+//    public void scheduleTaskWithInitialDelay() {
+//        System.out.println("thực hiện thông qua khoảng thời gian " + new Date());
+//    }
 
 }
 
