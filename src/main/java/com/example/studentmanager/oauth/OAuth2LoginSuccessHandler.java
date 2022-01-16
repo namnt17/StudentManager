@@ -13,8 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 
-//hihi thay doi nay
-// co nhin thay khong
+
 @Component
 public class OAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
